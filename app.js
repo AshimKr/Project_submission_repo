@@ -1,28 +1,37 @@
+require('dotenv').config(); // Load .env variables
+
 const express = require('express');
 const mongoose = require('mongoose');
-
 const app = express();
-const PORT = 3000;
 
-// Connection strings
-const employeesDbURI = 'mongodb+srv://anonymousone679:9k9RedYiCFZc90Ct@cluster0.enbf6et.mongodb.net/employees_db?retryWrites=true&w=majority&appName=Cluster0';
-const productsDbURI = 'mongodb+srv://anonymousone679:9k9RedYiCFZc90Ct@cluster0.enbf6et.mongodb.net/products_db?retryWrites=true&w=majority&appName=Cluster0';
+// Load env variables
+const PORT = process.env.PORT || 3000;
+const employeesDbURI = process.env.EMPLOYEES_DB_URI;
+const productsDbURI = process.env.PRODUCTS_DB_URI;
 
-// Create connections
+// Connect to MongoDB
 const employeeConn = mongoose.createConnection(employeesDbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 const productConn = mongoose.createConnection(productsDbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
 // Define schemas and models
-const Employee = employeeConn.model('Employee', new mongoose.Schema({ name: String, role: String }));
-const Product = productConn.model('Product', new mongoose.Schema({ name: String, price: Number }));
+const Employee = employeeConn.model('Employee', new mongoose.Schema({
+  name: String,
+  role: String
+}));
 
-// API Route
+const Product = productConn.model('Product', new mongoose.Schema({
+  name: String,
+  price: Number
+}));
+
+// API route
 app.get('/combined-data', async (req, res) => {
   try {
     const employees = await Employee.find({});
@@ -33,7 +42,6 @@ app.get('/combined-data', async (req, res) => {
   }
 });
 
-// Start server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
