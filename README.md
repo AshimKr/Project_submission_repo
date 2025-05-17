@@ -1,74 +1,36 @@
-# Combined Data API - Node.js Project
+# Dual Database API with MongoDB Atlas and Node.js For Crio.do test
 
-This project demonstrates how to create an API using **Node.js** that connects to **two separate MySQL databases**, fetches data from each, and returns a combined response. The setup is designed to showcase cross-database querying within a single API.
+This project creates a simple REST API using **Node.js**, **Express**, and **Mongoose** that connects to two separate MongoDB Atlas databases:
+
+- `employees_db`: Stores employee details
+- `products_db`: Stores product details
+
+The API fetches data from both databases and returns a combined response.
 
 ---
 
-## 📁 Project Structure
+## 🚀 Features
 
-project-root/
-│
-├── app.js # Main application file (Express server)
-├── package.json # NPM configuration file
-└── README.md # Project documentation (this file)
+- Connects to two MongoDB databases using Mongoose
+- Reads secure credentials from `.env`
+- Provides a single endpoint to retrieve combined data
 
-## ⚙️ Technologies Used
+---
 
-- **Node.js**
-- **Express.js**
-- **MySQL2 (Promise-based)**
+## 📦 Technologies Used
 
+- Node.js
+- Express.js
+- Mongoose
+- MongoDB Atlas (Cloud Database)
+- dotenv
 
-## 🧱 Databases Setup
+---
 
-The project uses two MySQL databases:
+## 🔧 Project Setup
 
-### 1. `employees_db`
-Stores employee details.
+### 1. Clone the repository
 
-```sql
-CREATE DATABASE employees_db;
-
-USE employees_db;
-
-CREATE TABLE employees (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100),
-    role VARCHAR(50)
-);
-
-CREATE DATABASE products_db;
-
-USE products_db;
-
-CREATE TABLE products (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100),
-    price DECIMAL(10,2)
-);
-
-Setup Instructions
-1. Clone the Repository
-
-git clone <repository-url>
-cd project-root
-
-npm install
-
-const employeesDbConfig = {
-    host: 'localhost',
-    user: 'your_user',
-    password: 'your_password',
-    database: 'employees_db'
-};
-
-const productsDbConfig = {
-    host: 'localhost',
-    user: 'your_user',
-    password: 'your_password',
-    database: 'products_db'
-};
-
-node app.js
-
-GET http://localhost:3000/combined-data
+```bash
+git clone <your-repo-url>
+cd dual-db-api
