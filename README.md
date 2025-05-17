@@ -36,3 +36,39 @@ CREATE TABLE employees (
     name VARCHAR(100),
     role VARCHAR(50)
 );
+
+CREATE DATABASE products_db;
+
+USE products_db;
+
+CREATE TABLE products (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    price DECIMAL(10,2)
+);
+
+Setup Instructions
+1. Clone the Repository
+
+git clone <repository-url>
+cd project-root
+
+npm install
+
+const employeesDbConfig = {
+    host: 'localhost',
+    user: 'your_user',
+    password: 'your_password',
+    database: 'employees_db'
+};
+
+const productsDbConfig = {
+    host: 'localhost',
+    user: 'your_user',
+    password: 'your_password',
+    database: 'products_db'
+};
+
+node app.js
+
+GET http://localhost:3000/combined-data
